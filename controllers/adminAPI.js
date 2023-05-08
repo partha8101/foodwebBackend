@@ -154,6 +154,7 @@ router.put('/updatepass',(req,res)=>{
 
 router.get('/vieworder/:useremail',(req,res)=>{
     OrderModel.find({useremail:req.params.useremail})
+    
         .then((result) => {
             if(result.length>0){
                 res.send(result);
@@ -167,7 +168,20 @@ router.get('/vieworder/:useremail',(req,res)=>{
 })
 
 
-
+router.get('/vieworderofres/:resemail',(req,res)=>{
+    OrderModel.find({resemail:req.params.resemail})
+    
+        .then((result) => {
+            if(result.length>0){
+                res.send(result);
+            }
+            else{
+                res.send([]);
+            }
+        }).catch((err) => {
+            console.log({message:err.message});
+        });
+})
 
 
 module.exports=router;
